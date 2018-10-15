@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Custom File Inputs</title>
+		<style type="text/css">	
+		/************ Common style ************/
+		*,
+		*:after,
+		*:before {
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		body{
+			margin: 0;
+			padding: 0;
+			font-family: Arial;
+		}
+		h1 {
+			text-align: center;
+			text-transform: uppercase;
+			font-size: x-large;
+			width: calc(100% - 30px);
+			margin: 30px auto;
+			color: #10456f;
+		}
+		.content {
+			width: 100%;
+			max-width: 600px;
+			text-align: center;
+			margin: 0 auto;
+			padding: 0 0 3em 0;
+		}
+		.box {
+			background-color: #e4f7ff;
+			    padding: 30px 15px;
+		}
+		.box + .box {
+			margin-top: 2.5rem;
+		}
+		textarea {
+			width: 100%!important;
+			overflow: auto;
+			resize: none;
+			padding: 20px!important;
+			border: 0;
+			outline: 0;
+			min-height: 140px;
+		}
+		.html {
+			margin-top: 10px;
+		}
+		
+		/************* Custom File types *************/
+		.inputfile {
+			width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			overflow: hidden;
+			position: absolute;
+			z-index: -1;
+		}
+
+		.inputfile + label {
+			max-width: 80%;
+			font-size: 14px;
+			font-weight: 700;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			cursor: pointer;
+			display: inline-block;
+			overflow: hidden;
+			padding: 10px 20px;
+		}
+		.inputfile + label .upload-image {
+			max-width: 100%;
+			position: relative;
+			top: 1px;
+		}
+
+		.inputfile:focus + label,
+		.inputfile.has-focus + label {
+			outline: 1px dotted #000;
+			outline: -webkit-focus-ring-color auto 5px;
+		}
+
+		.inputfile + label svg {
+			width: 1em;
+			height: 1em;
+			vertical-align: middle;
+			fill: currentColor;
+			margin-top: -4px;
+			margin-right: 4px;
+		}
+
+
+		/* style 1 */
+		.inputfile-1 + label {
+			color: #ffffff;
+			background-color: #03A9F4;
+		}
+
+		.inputfile-1:focus + label,
+		.inputfile-1.has-focus + label,
+		.inputfile-1 + label:hover {
+			background-color: #10456f;
+		}
+
+
+		/* style 2 */
+		.inputfile-2 + label {
+			color: #03A9F4;
+			border: 2px solid currentColor;
+		}
+
+		.inputfile-2:focus + label,
+		.inputfile-2.has-focus + label,
+		.inputfile-2 + label:hover {
+			color: #10456f;
+		}
+
+		/* style 3 */
+		.inputfile-3 + label {
+			color: #03A9F4;
+		}
+
+		.inputfile-3:focus + label,
+		.inputfile-3.has-focus + label,
+		.inputfile-3 + label:hover {
+			color: #10456f;
+		}
+
+		/* style 4 */
+		.inputfile-4 + label {
+			color: #03A9F4;
+		}
+
+		.inputfile-4 + label {
+			border: 1px solid #03A9F4;
+			background-color: #ffffff;
+			padding: 0;
+		}
+
+		.inputfile-4:focus + label,
+		.inputfile-4.has-focus + label,
+		.inputfile-4 + label:hover {
+			border-color: #10456f;
+		}
+
+		.inputfile-4 + label span,
+		.inputfile-4 + label strong {
+			padding: 10px 20px;
+		}
+
+		.inputfile-4 + label span {
+			width: 200px;
+			min-height: 2em;
+			display: inline-block;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+			overflow: hidden;
+			vertical-align: top;
+		}
+
+		.inputfile-4 + label strong {
+			height: 100%;
+			color: #ffffff;
+			background-color: #03A9F4;
+			display: inline-block;
+		}
+
+		.inputfile-4:focus + label strong,
+		.inputfile-4.has-focus + label strong,
+		.inputfile-4 + label:hover strong {
+			background-color: #10456f;
+		}
+
+		@media screen and (max-width: 50em) {
+			.inputfile-4 + label strong {
+				display: block;
+			}
+		}
+		@media screen and (max-width: 767px) {
+			.device-default .inputfile {
+				opacity: 1;
+				width: initial;
+				height: initial;
+				z-index: initial;
+				overflow: initial;
+				position: initial;
+			}
+			.device-default .inputfile + label {
+				display: none;
+			}
+		}
+		</style>
+		<!--[if IE]>
+  		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="container">
+			<h1>Custom File Inputs</h1>
+			<div class="content">				
+				<div class="box device-default">
+				<h3>Input style1</h3>
+					<input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+					<label for="file-1"><img class="upload-image" src="outbox.png"/> <span>Choose a file&hellip;</span></label>
+				
+				<div class="html">	
+				<strong>HTML</strong>
+				<textarea wrap="off" readonly>
+<div class="box device-default">					
+	<input type="file" name="file-1[]" id="file-1" class="inputfile inputfile-1" data-multiple-caption="{count} files selected" multiple />
+	<label for="file-1"><img class="upload-image" src="outbox.png"/> <span>Choose a file&hellip;</span></label>
+</div>
+				</textarea>
+				</div>
+				
+</div>
+				
+				<div class="box">
+				<h3>Input style2</h3>
+					<input type="file" name="file-2[]" id="file-2" class="inputfile inputfile-2" data-multiple-caption="{count} files selected" multiple />
+					<label for="file-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+					
+				<div class="html">	
+				<strong>HTML</strong>
+				<textarea wrap="off" readonly>
+<div class="box">					
+	<input type="file" name="file-2[]" id="file-2" class="inputfile inputfile-2" data-multiple-caption="{count} files selected" multiple />
+	<label for="file-2"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+</div>
+				</textarea>
+				</div>
+					
+				</div>
+				
+
+				<div class="box">
+				<h3>Input style3</h3>
+					<input type="file" name="file-3[]" id="file-3" class="inputfile inputfile-3" data-multiple-caption="{count} files selected" multiple />
+					<label for="file-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+					
+					<div class="html">	
+				<strong>HTML</strong>
+				<textarea wrap="off" readonly>
+<div class="box">					
+	<input type="file" name="file-3[]" id="file-3" class="inputfile inputfile-3" data-multiple-caption="{count} files selected" multiple />
+	<label for="file-3"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17"><path d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z"/></svg> <span>Choose a file&hellip;</span></label>
+</div>
+				</textarea>
+				</div>
+				</div>
+
+				<div class="box">
+				<h3>Input style4</h3>
+					<input type="file" name="file-4[]" id="file-4" class="inputfile inputfile-3" data-multiple-caption="{count} files selected" multiple />
+					<label for="file-4"><span>Choose a file&hellip;</span></label>
+					
+					<div class="html">	
+				<strong>HTML</strong>
+				<textarea wrap="off" readonly>
+<div class="box">					
+	<input type="file" name="file-4[]" id="file-4" class="inputfile inputfile-3" data-multiple-caption="{count} files selected" multiple />
+	<label for="file-4"><span>Choose a file&hellip;</span></label>
+</div>
+				</textarea>
+				</div>
+				</div>
+
+				<div class="box">
+				<h3>Input style5</h3>
+					<input type="file" name="file-7[]" id="file-7" class="inputfile inputfile-4" data-multiple-caption="{count} files selected" multiple />
+					<label for="file-7"><span></span><strong>Browse</strong></label>
+					
+					<div class="html">	
+				<strong>HTML</strong>
+				<textarea wrap="off" readonly>
+<div class="box">					
+	<input type="file" name="file-7[]" id="file-7" class="inputfile inputfile-4" data-multiple-caption="{count} files selected" multiple />
+	<label for="file-7"><span></span><strong>Browse</strong></label>
+</div>
+				</textarea>
+				</div>
+				</div>
+				
+				<div class="box">
+					
+					<div class="html">	
+				<strong>SCRIPT</strong>
+				<textarea wrap="off" readonly>
+'use strict';
+;( function ( document, window, index )
+{
+	var inputs = document.querySelectorAll( '.inputfile' );
+	Array.prototype.forEach.call( inputs, function( input )
+	{
+		var label	 = input.nextElementSibling,
+			labelVal = label.innerHTML;
+
+		input.addEventListener( 'change', function( e )
+		{
+			var fileName = '';
+			if( this.files && this.files.length > 1 )
+				fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+			else
+				fileName = e.target.value.split( '\\' ).pop();
+
+			if( fileName )
+				label.querySelector( 'span' ).innerHTML = fileName;
+			else
+				label.innerHTML = labelVal;
+		});
+
+		// Firefox bug fix
+		input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+		input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+	});
+}( document, window, 0 ));
+				</textarea>
+				</div>
+				</div>
+				
+				<div class="box">
+					
+					<div class="html">	
+				<strong>CSS</strong>
+				<textarea wrap="off" readonly>
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+
+.inputfile + label {
+	max-width: 80%;
+	font-size: 14px;
+	font-weight: 700;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+	display: inline-block;
+	overflow: hidden;
+	padding: 10px 20px;
+}
+.inputfile + label .upload-image {
+	max-width: 100%;
+	position: relative;
+	top: 1px;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label svg {
+	width: 1em;
+	height: 1em;
+	vertical-align: middle;
+	fill: currentColor;
+	margin-top: -4px;
+	margin-right: 4px;
+}
+
+
+/* style 1 */
+.inputfile-1 + label {
+	color: #ffffff;
+	background-color: #03A9F4;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+	background-color: #10456f;
+}
+
+
+/* style 2 */
+.inputfile-2 + label {
+	color: #03A9F4;
+	border: 2px solid currentColor;
+}
+
+.inputfile-2:focus + label,
+.inputfile-2.has-focus + label,
+.inputfile-2 + label:hover {
+	color: #10456f;
+}
+
+/* style 3 */
+.inputfile-3 + label {
+	color: #03A9F4;
+}
+
+.inputfile-3:focus + label,
+.inputfile-3.has-focus + label,
+.inputfile-3 + label:hover {
+	color: #10456f;
+}
+
+/* style 4 */
+.inputfile-4 + label {
+	color: #03A9F4;
+}
+
+.inputfile-4 + label {
+	border: 1px solid #03A9F4;
+	background-color: #ffffff;
+	padding: 0;
+}
+
+.inputfile-4:focus + label,
+.inputfile-4.has-focus + label,
+.inputfile-4 + label:hover {
+	border-color: #10456f;
+}
+
+.inputfile-4 + label span,
+.inputfile-4 + label strong {
+	padding: 10px 20px;
+}
+
+.inputfile-4 + label span {
+	width: 200px;
+	min-height: 2em;
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	vertical-align: top;
+}
+
+.inputfile-4 + label strong {
+	height: 100%;
+	color: #ffffff;
+	background-color: #03A9F4;
+	display: inline-block;
+}
+
+.inputfile-4:focus + label strong,
+.inputfile-4.has-focus + label strong,
+.inputfile-4 + label:hover strong {
+	background-color: #10456f;
+}
+
+@media screen and (max-width: 50em) {
+	.inputfile-4 + label strong {
+		display: block;
+	}
+}
+@media screen and (max-width: 767px) {
+	.device-default .inputfile {
+		opacity: 1;
+		width: initial;
+		height: initial;
+		z-index: initial;
+		overflow: initial;
+		position: initial;
+	}
+	.device-default .inputfile + label {
+		display: none;
+	}
+}
+				</textarea>
+				</div>
+				</div>
+			</div>
+		</div><!-- /container -->
+		<script>
+			'use strict';
+			;( function ( document, window, index )
+			{
+				var inputs = document.querySelectorAll( '.inputfile' );
+				Array.prototype.forEach.call( inputs, function( input )
+				{
+					var label	 = input.nextElementSibling,
+						labelVal = label.innerHTML;
+
+					input.addEventListener( 'change', function( e )
+					{
+						var fileName = '';
+						if( this.files && this.files.length > 1 )
+							fileName = ( this.getAttribute( 'data-multiple-caption' ) || '' ).replace( '{count}', this.files.length );
+						else
+							fileName = e.target.value.split( '\\' ).pop();
+
+						if( fileName )
+							label.querySelector( 'span' ).innerHTML = fileName;
+						else
+							label.innerHTML = labelVal;
+					});
+
+					// Firefox bug fix
+					input.addEventListener( 'focus', function(){ input.classList.add( 'has-focus' ); });
+					input.addEventListener( 'blur', function(){ input.classList.remove( 'has-focus' ); });
+				});
+			}( document, window, 0 ));
+		</script>
+	</body>
+</html>
